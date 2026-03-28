@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초대장</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --bg-color: #f8f9fa;
+            --text-color: #202124;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .invitation-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .divider {
+            height: 2px;
+            width: 50px;
+            background: var(--primary-color);
+            margin: 20px auto;
+        }
+        .content {
+            margin: 30px 0;
+            font-size: 1.1rem;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .info-table th, .info-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .info-table th {
+            width: 30%;
+            color: #666;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #1557b0;
+        }
+    </style>
+</head>
+<body>
 
+<div class="invitation-card">
+    <div class="header">
+        <p>INVITATION</p>
+        <h1>행사 명칭을 입력하세요</h1>
+        <div class="divider"></div>
+    </div>
+
+    <div class="content">
+        귀하를 이번 행사에 정중히 초대합니다.<br>
+        새로운 기술과 비전을 공유하는 자리가 되길 바랍니다.
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <th>일시</th>
+            <td>2026년 00월 00일 (요일) 14:00</td>
+        </tr>
+        <tr>
+            <th>장소</th>
+            <td>서울특별시 OO구 OO로 123 (행사장 명칭)</td>
+        </tr>
+        <tr>
+            <th>문의</th>
+            <td>02-000-0000 / admin@example.com</td>
+        </tr>
+    </table>
+
+    <a href="https://forms.gle/your-link" class="cta-button">참석 회신하기 (RSVP)</a>
+</div>
+
+</body>
+</html>
