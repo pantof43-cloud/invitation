@@ -3,108 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>초대장</title>
+    <title>초대장 | [행사명 입력]</title>
     <style>
         :root {
-            --primary-color: #1a73e8;
-            --bg-color: #f8f9fa;
-            --text-color: #202124;
+            /* 고급스러운 색상 팔레트 정의 */
+            --primary-dark: #2c3e50;    /* 깊은 네이비/그레이 */
+            --accent-gold: #c19a6b;     /* 차분한 골드/베이지 */
+            --text-main: #333333;
+            --text-light: #666666;
+            --bg-body: #f4f4f4;
+            --bg-card: #ffffff;
+            --shadow-card: 0 15px 35px rgba(0,0,0,0.1);
         }
+
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
-        .invitation-card {
-            background: #ffffff;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+        /* 초대장 카드 메인 컨테이너 */
+        .invitation-container {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden; /* 내부 요소가 테두리를 넘지 않도록 */
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* 상단 장식 및 제목 영역 */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%); /* 그라데이션 배경 */
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        /* 고급스러움을 더하는 패턴 (Inline SVG) */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-top {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: rgba(255,255,255,0.8);
+            position: relative; /* 패턴 위에 표시 */
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+            color: #ffffff;
+            position: relative; /* 패턴 위에 표시 */
+        }
+
+        .divider {
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent-gold);
+            margin: 25px auto;
+            position: relative; /* 패턴 위에 표시 */
+        }
+
+        /* 본문 내용 영역 */
+        .content {
+            padding: 50px 40px;
             text-align: center;
         }
-        .header h1 {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 40px;
         }
-        .divider {
-            height: 2px;
-            width: 50px;
-            background: var(--primary-color);
-            margin: 20px auto;
-        }
-        .content {
-            margin: 30px 0;
-            font-size: 1.1rem;
-        }
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+
+        /* 행사 정보 테이블 디자인 */
+        .info-list {
+            margin: 40px 0;
             text-align: left;
-        }
-        .info-table th, .info-table td {
-            padding: 12px 8px;
+            border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
+            padding: 10px 0;
         }
-        .info-table th {
-            width: 30%;
-            color: #666;
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 10px;
         }
+
+        /* 아이콘 스타일 (FontAwesome 대용 Inline SVG) */
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 20px;
+            flex-shrink: 0; /* 아이콘 크기 고정 */
+        }
+
+        .info-text-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* 하단 버튼 및 푸터 */
+        .action-area {
+            text-align: center;
+            margin-top: 50px;
+        }
+
         .cta-button {
             display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: var(--primary-color);
+            padding: 18px 45px;
+            background-color: var(--primary-dark);
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.3s;
+            border-radius: 30px; /* 둥근 버튼 */
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+            transition: all 0.3s ease;
         }
+
         .cta-button:hover {
-            background-color: #1557b0;
+            background-color: #34495e;
+            transform: translateY(-2px); /* 호버 시 약간 상승 */
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+        }
+
+        .footer {
+            padding: 30px;
+            background-color: #fafafa;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* 모바일 반응형 조절 */
+        @media (max-width: 600px) {
+            .header { padding: 40px 20px; }
+            .header h1 { font-size: 1.8rem; }
+            .content { padding: 30px 20px; }
+            .intro-text { font-size: 1.1rem; }
+            .info-item { padding: 12px 5px; }
+            .info-icon { margin-right: 15px; }
+            .info-value { font-size: 1rem; }
+            .cta-button { width: 100%; box-sizing: border-box; } /* 모바일에서 버튼 꽉 차게 */
         }
     </style>
 </head>
 <body>
 
-<div class="invitation-card">
+<div class="invitation-container">
     <div class="header">
-        <p>INVITATION</p>
-        <h1>행사 명칭을 입력하세요</h1>
+        <div class="header-top">Official Invitation</div>
+        <h1>2026 미래 기술 포럼</h1>
         <div class="divider"></div>
+        <p style="margin: 0; position: relative;">변화의 중심에서 새로운 기회를 논하다</p>
     </div>
 
     <div class="content">
-        귀하를 이번 행사에 정중히 초대합니다.<br>
-        새로운 기술과 비전을 공유하는 자리가 되길 바랍니다.
+        <div class="intro-text">
+            귀하를 2026 미래 기술 포럼에 정중히 초대합니다.<br>
+            이번 포럼에서는 AI, 모빌리티, 지속 가능성 분야의 리더들이 모여<br>
+            미래 산업의 지형도를 조망하고 혁신의 과제를 논의하고자 합니다.<br>
+            자리를 빛내주시어 혜안을 나누어 주시기 바랍니다.
+        </div>
+
+        <div class="info-list">
+            <div class="info-item">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <div class="info-text-group">
+                    <span class="info-label">일시 | Date</span>
+                    <span class="info-value">2026년 5월 20일 (수) 10:00 - 17:00</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <div class="info-text-group">
+                    <span class="info-label">장소 | Venue</span>
+                    <span class="info-value">서울 그랜드 컨벤션 센터, 메인 홀 (3F)</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <div class="info-text-group">
+                    <span class="info-label">주최 | Host</span>
+                    <span class="info-value">미래기술포럼 조직위원회 / (주)테크비전</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-area">
+            <a href="https://forms.gle/your-rsvp-link" class="cta-button" target="_blank">참석 회신하기 (RSVP)</a>
+            <p style="font-size: 0.85rem; color: #888; margin-top: 15px;">* 원활한 행사 준비를 위해 5월 10일까지 회신 부탁드립니다.</p>
+        </div>
     </div>
 
-    <table class="info-table">
-        <tr>
-            <th>일시</th>
-            <td>2026년 00월 00일 (요일) 14:00</td>
-        </tr>
-        <tr>
-            <th>장소</th>
-            <td>서울특별시 OO구 OO로 123 (행사장 명칭)</td>
-        </tr>
-        <tr>
-            <th>문의</th>
-            <td>02-000-0000 / admin@example.com</td>
-        </tr>
-    </table>
-
-    <a href="https://forms.gle/your-link" class="cta-button">참석 회신하기 (RSVP)</a>
+    <div class="footer">
+        문의: 02-1234-5678 | info@futuretechforum.kr<br>
+        &copy; 2026 Future Tech Forum. All Rights Reserved.
+    </div>
 </div>
 
 </body>
